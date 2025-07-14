@@ -5,15 +5,21 @@ This is a simple Dino game implemented in Java.
 ## How to Run
 
 1.  **Compile the source code:**
+
     ```bash
     javac -d bin src/**/*.java src/*.java
     ```
+
 2.  **Run the game:**
+
     -   On Linux/macOS:
+
         ```bash
         ./run.sh
         ```
+
     -   On Windows:
+    
         ```bat
         run.bat
         ```
