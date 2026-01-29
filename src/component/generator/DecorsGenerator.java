@@ -31,6 +31,7 @@ public class DecorsGenerator extends Generator {
         Obstacle obstacle = new Decors();
         obstacle.x = getGame().getFenetre().getWidth();
         obstacle.y = randomY(obstacle);
+        obstacle.setSpeed(getGameSpeed());
         return obstacle;
     }
 

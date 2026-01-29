@@ -23,6 +23,8 @@ public class Alive extends Material {
     private boolean lyingDown;
     private int energy;
 
+    private Game game;
+
     public Alive() {
         super();
         setSpeed(1);
@@ -150,8 +152,8 @@ public class Alive extends Material {
         return false;
     }
 
-    public void fire(Game game) {
-        if (useEnergy()) {
+    public void fire() {
+        if (game != null && useEnergy()) {
             Bonus bullet = new Bonus(true);
             bullet.setGame(game);
             bullet.setSpeed(10);
@@ -255,6 +257,14 @@ public class Alive extends Material {
 
     public void setLyingDown(boolean lying) {
         this.lyingDown = lying;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
 }

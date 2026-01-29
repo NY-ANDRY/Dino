@@ -26,6 +26,11 @@ public abstract class Generator implements ActionListener {
         return result;
     }
 
+    protected int getGameSpeed() {
+        int lvl = getGame().lvl();
+        return lvl * 2 + 5;
+    }
+
     public abstract Material getObstacle();
 
     public Game getGame() {

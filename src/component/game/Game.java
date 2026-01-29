@@ -4,6 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.List;
 
 import aff.*;
 import component.character.Alive;
@@ -20,19 +21,26 @@ public class Game extends JPanel {
 	private boolean play;
 	private int score;
 
-	private ArrayList<Integer> scoreHistory;
+	private List<Integer> scoreHistory;
 	private int best;
 	private Save save;
 
 	private Alive player;
 	private Ground ground;
-	private ArrayList<Obstacle> obstacles;
+	private List<Obstacle> obstacles;
 	private GameTimer gameTimer;
+
+	private Font font;
+	private Color color001;
+	private Color color002;
 
 	public Game(Fenetre f) {
 		setFenetre(f);
 		setSave(new Save("data/dino.csv"));
 		setScoreHistory(getSave().getData());
+		font = new Font("pixelify sans", Font.TYPE1_FONT, 18);
+		color001 = new Color(100, 100, 100);
+		color002 = new Color(80, 80, 80);
 		init();
 	}
 
@@ -44,6 +52,7 @@ public class Game extends JPanel {
 		ground.setFrame(0, fenetre.getHeight() - 60, fenetre.getWidth(), 100);
 
 		Dino dino = new Dino();
+		dino.setGame(this);
 		dino.x = 50;
 		dino.y = (ground.y - dino.height);
 		dino.setGround(ground);
@@ -158,8 +167,9 @@ public class Game extends JPanel {
 	private Graphics2D style(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g.create();
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setFont(new Font("pixelify sanss", Font.TYPE1_FONT, 26));
-		g2.setColor(new Color(100, 100, 100));
+		font.deriveFont(14);
+		g2.setFont(font);
+		g2.setColor(color001);
 		return g2;
 	}
 
@@ -170,14 +180,16 @@ public class Game extends JPanel {
 
 	private void writeScore(Graphics2D g2) {
 		g2.drawString(String.format("%05d", getScore()), getFenetre().getWidth() - 96, 40);
-		g2.setFont(new Font("pixelify sanss", Font.TYPE1_FONT, 16));
-		g2.setColor(new Color(80, 80, 80));
-		g2.drawString(String.format("%05d", getBest()), getFenetre().getWidth() - 68, 80);
+		font.deriveFont(8);
+		g2.setFont(font);
+		g2.setColor(color002);
+		g2.drawString(String.format("%05d", getBest()), getFenetre().getWidth() - 96, 80);
 	}
 
 	private void writeControl(Graphics2D g2) {
-		g2.setFont(new Font("pixelify sanss", Font.TYPE1_FONT, 16));
-		g2.setColor(new Color(80, 80, 80));
+		font.deriveFont(8);
+		g2.setFont(font);
+		g2.setColor(color002);
 		g2.drawString("sauter : w", 20, 100);
 		g2.drawString("accroupi : s", 20, 120);
 		g2.drawString("tirer : e", 20, 140);
@@ -232,11 +244,11 @@ public class Game extends JPanel {
 		this.ground = ground;
 	}
 
-	public ArrayList<Obstacle> getObstacles() {
+	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
 
-	public void setObstacles(ArrayList<Obstacle> obstacles) {
+	public void setObstacles(List<Obstacle> obstacles) {
 		this.obstacles = obstacles;
 	}
 
@@ -248,11 +260,11 @@ public class Game extends JPanel {
 		this.score = score;
 	}
 
-	public ArrayList<Integer> getScoreHistory() {
+	public List<Integer> getScoreHistory() {
 		return scoreHistory;
 	}
 
-	public void setScoreHistory(ArrayList<Integer> scoreHistory) {
+	public void setScoreHistory(List<Integer> scoreHistory) {
 		this.scoreHistory = scoreHistory;
 	}
 

@@ -34,7 +34,7 @@ public class Move implements KeyListener {
             game.begin();
         }
         if (e.getKeyChar() == 'e') {
-            game.getPlayer().fire(game);
+            game.getPlayer().fire();
         }
 
     }

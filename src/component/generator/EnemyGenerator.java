@@ -40,13 +40,8 @@ public class EnemyGenerator extends Generator {
 
         enemy.x = getGame().getFenetre().getWidth();
         enemy.y = enemy.randomY(getGame().getGround());
-        enemy.setSpeed(getSpeed());
+        enemy.setSpeed(getGameSpeed());
         return enemy;
-    }
-
-    private int getSpeed() {
-        int lvl = getGame().lvl();
-        return lvl * 2 + 5;
     }
 
     private int[] timerDelay() {
